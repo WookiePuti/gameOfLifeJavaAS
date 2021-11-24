@@ -20,9 +20,26 @@ public class Main {
         Profile profile = new ProfileImpl(properties);
         AgentContainer mainContainer = runtime.createMainContainer(profile);
 
-        AgentController agentsSet = mainContainer.createNewAgent("agent0", "defaultcontainer.TestAgent", new Object[]{});
+        int M=10,N=10;
+        int[][] grid = { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                         { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 },
+                         { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 },
+                         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                         { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 },
+                         { 0, 0, 1, 1, 0, 0, 0, 0, 0, 0 },
+                         { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
+                         { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 },
+                         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+        };
+        AgentController agentsSet;
+        for(int i=0;i<M;i++){
+            for(int j=0;j<N;j++){
+                agentsSet = mainContainer.createNewAgent("agent"+i+j, "defaultcontainer.GameOfLifeAgent", new Object[]{});
+                agentsSet.start();
+            }
+        }
 
-        agentsSet.start();
 
     }
 }
