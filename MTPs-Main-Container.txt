@@ -1,1 +1,1 @@
-http://lukasz-GL552VW:7778/acc
+http://michal:7778/acc
