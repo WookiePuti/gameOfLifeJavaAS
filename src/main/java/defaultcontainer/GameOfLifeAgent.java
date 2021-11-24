@@ -120,6 +120,4 @@ public class GameOfLifeAgent extends Agent {
             this.isAlive=false;
         }
     }
-
-
 }

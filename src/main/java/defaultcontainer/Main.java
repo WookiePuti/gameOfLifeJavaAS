@@ -10,6 +10,9 @@ import jade.wrapper.AgentController;
 import jade.wrapper.ControllerException;
 import jade.wrapper.StaleProxyException;
 
+import java.util.concurrent.ThreadLocalRandom;
+
+
 public class Main {
 
     public static void main(String[] args) throws ControllerException {
@@ -20,20 +23,21 @@ public class Main {
         properties.setProperty(Profile.GUI, "true");
         Profile profile = new ProfileImpl(properties);
         AgentContainer mainContainer = runtime.createMainContainer(profile);
+        int M= 10;
+        int N= M;
 
-        int M=10,N=10;
-        int[][] grid = { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                         { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 },
-                         { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 },
-                         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                         { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 },
-                         { 0, 0, 1, 1, 0, 0, 0, 0, 0, 0 },
-                         { 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
-                         { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 },
-                         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
-        };
-        AgentController agentsSet;
+        int[][] grid = new int[M][N];
+        for(int i=0;i<M;i++){
+            for (int j=0;j<N;j++){
+                if (Math.random()<0.5){
+                    grid[i][j]=1;
+                }
+                else{
+                    grid[i][j]=0;
+                }
+            }
+        }
+        
         for(int i=0;i<M;i++){
             for(int j=0;j<N;j++){
                 mainContainer.createNewAgent("agent"+i+j, "defaultcontainer.GameOfLifeAgent", new Object[]{grid[i][j] == 1,i,j,M,N});
